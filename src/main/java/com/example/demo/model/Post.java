@@ -3,7 +3,7 @@ package com.example.demo.model;
 import java.util.Date;
 
 public class Post {
-    final String text;
+    private String text;
     private Integer likes;
     private Date creationDate;
 
