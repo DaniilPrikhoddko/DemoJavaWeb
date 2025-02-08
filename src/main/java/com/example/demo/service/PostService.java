@@ -16,9 +16,9 @@ public class PostService {
     public void init() {
         posts = new ArrayList<>();
         // Инициализация начальных данных
-        posts.add(new Post("Ура я в Майами!", new Date(125, 4, 5)));
-        posts.add(new Post("Грустно. в холодильнике кончились сырники", new Date()));
-        posts.add(new Post("Кран", new Date(177, 6, 7)));
+        posts.add(new Post((long) posts.size(),"Ура я в Майами!", new Date(125, 4, 5)));
+        posts.add(new Post((long) posts.size(),"Грустно. в холодильнике кончились сырники", new Date()));
+        posts.add(new Post((long) posts.size(),"Кран", new Date(177, 6, 7)));
     }
 
     public List<Post> listAllPosts() {
@@ -26,7 +26,8 @@ public class PostService {
     }
 
     public void create(String text) {
-        posts.add(new Post(text, new Date()));
+        posts.add(new Post((long) posts.size(), text, new Date()));
     }
+
 }
 

@@ -14,7 +14,6 @@ public class PostsCreateController {
         return "create";
     }
 
-    @ResponseBody
     @PostMapping("/new")
     public String doCreate(@ModelAttribute("text") String text) {
         postService.create(text);
