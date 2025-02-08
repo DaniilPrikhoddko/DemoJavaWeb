@@ -1,33 +1,27 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Post;
+import com.example.demo.repository.PostRepository;
 import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 @Service
 public class PostService {
-    private List<Post> posts;
-
-    @PostConstruct
-    public void init() {
-        posts = new ArrayList<>();
-        // Инициализация начальных данных
-        posts.add(new Post((long) posts.size(),"Ура я в Майами!", new Date(125, 4, 5)));
-        posts.add(new Post((long) posts.size(),"Грустно. в холодильнике кончились сырники", new Date()));
-        posts.add(new Post((long) posts.size(),"Кран", new Date(177, 6, 7)));
-    }
+    @Autowired
+    PostRepository postRepository;
 
     public List<Post> listAllPosts() {
-        return posts;
+        return StreamSupport.stream(postRepository.findAll().spliterator(), false).toList();
     }
 
-    public void create(String text) {
-        posts.add(new Post((long) posts.size(), text, new Date()));
+    public void create(final String text) {
+        Post post = new Post(null, text, new Date());
+        postRepository.save(post);
     }
-
 }
-
